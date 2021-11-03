@@ -7,7 +7,7 @@
         </template>
         <template v-else>
           <div class="action">
-            <div class="arrow" @click="closeProfile"></div>
+            <div class="arrow" @click.stop="closeProfile"></div>
           </div>
           <h3>Профиль</h3>
         </template>

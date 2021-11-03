@@ -17,6 +17,7 @@ import TableSVG from "@/assets/images/workPlace.svg";
 import * as d3 from "d3";
 import legend from "@/assets/data/legend.json";
 import tables from "@/assets/data/tables.json";
+import people from "@/assets/data/people.json";
 
 export default {
   components: {
@@ -30,6 +31,7 @@ export default {
       g: null,
       tables: [],
       tableSVG: null,
+      currentPerson: null,
     };
   },
   mounted() {
@@ -69,12 +71,15 @@ export default {
             "fill",
             legend.find((it) => it.group_id === table.group_id)?.color ??
               "transparent"
-          );
-
-        console.log(svgTable);
+          )
+          .on("click", () => {
+            // console.log(this.currentPerson);
+            const tableID = tables.find((it) => it._id === table._id)?._id;
+            this.currentPerson = people.find((it) => it._id === tableID);
+            // console.log(this.currentPerson);
+            this.$emit("getPerson", this.currentPerson);
+          });
       });
-
-      console.log(svgTablesGroup);
     },
   },
 };
